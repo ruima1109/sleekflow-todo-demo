@@ -28,7 +28,7 @@ h2 {
 
 form {
   display: flex;
-  align-items: center; /* Center items vertically */
+  align-items: center;
   flex-wrap: wrap;
   gap: 10px;
   margin-bottom: 20px;
@@ -36,12 +36,12 @@ form {
 
 .form-group {
   display: flex;
-  align-items: center; /* Center items vertically */
+  align-items: center;
   gap: 10px;
 }
 
 .form-group label {
-  margin-right: 10px; /* Add margin to the right of labels */
+  margin-right: 10px;
 }
 
 form input,
@@ -52,7 +52,7 @@ form button {
 }
 
 form button {
-  flex: 0 1 auto; /* Allow buttons to size based on content */
+  flex: 0 1 auto;
   padding: 10px 20px;
   cursor: pointer;
   background-color: #007bff;
@@ -84,7 +84,7 @@ th, td {
   text-align: left;
   padding: 10px;
   border-bottom: 1px solid #ddd;
-  white-space: nowrap; /* Prevent text from wrapping */
+  white-space: nowrap;
 }
 
 th {
@@ -124,8 +124,8 @@ td {
   display: inline-flex;
   align-items: center;
   position: absolute;
-  top: 20px; /* Adjust as needed */
-  right: 60px; /* Adjust as needed */
+  top: 20px;
+  right: 60px;
   cursor: pointer;
 }
 
@@ -137,24 +137,24 @@ td {
 
 .user-options-wrapper {
   position: absolute;
-  top: 35px; /* Adjust this value to position the dropdown correctly */
+  top: 35px;
   right: 0;
   background-color: #fff;
   border: 1px solid #ddd;
   border-radius: 5px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  z-index: 1; /* Ensure it stays on top */
+  z-index: 1;
 }
 
 .user-option {
-  padding: 10px; /* Adjust padding as needed */
+  padding: 10px;
   text-align: center;
-  white-space: nowrap; /* Prevents the text from wrapping */
+  white-space: nowrap;
 }
 
 .user-option:hover {
   background-color: #f2f2f2;
-  color:#007bff;
+  color: #007bff;
 }
 
 .header-container {
@@ -175,8 +175,8 @@ td {
   padding: 20px;
   margin-bottom: 20px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  max-width: 1000px; /* Set a fixed max-width for the todo list */
-  margin: 20px auto; /* Center the todo list and add vertical spacing */
+  max-width: 1000px;
+  margin: 20px auto;
 }
 
 table th, table td {
@@ -192,8 +192,8 @@ table td button {
 }
 
 .form-container {
-  max-width: 1000px; /* Adjust the max-width for form containers */
-  margin: 0 auto 20px auto; /* Center and add bottom margin */
+  max-width: 1000px;
+  margin: 0 auto 20px auto;
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
@@ -208,7 +208,7 @@ table td button {
 }
 
 .form-container button {
-  flex: 0 1 auto; /* Allow buttons to size based on content */
+  flex: 0 1 auto;
 }
 
 .table-actions button {
@@ -223,7 +223,7 @@ table td button {
 }
 
 .form-group label {
-  white-space: nowrap; /* Prevent label text from wrapping */
+  white-space: nowrap;
 }
 
 form .form-group {
@@ -239,9 +239,70 @@ form .form-group input,
 form .form-group select,
 form .form-group button {
   flex: 1;
-  margin-left: 10px; /* Add margin between the label and input */
+  margin-left: 10px;
 }
 
 td, th {
   width: 20%;
+}
+
+/* Add these styles to make table headers look clickable */
+th.sortable {
+  cursor: pointer;
+  user-select: none;
+}
+
+th.sortable:hover {
+  background-color: #e2e6ea;
+}
+
+.share-form-container {
+  margin-top: 10px;
+}
+
+/* Center the add todo list form */
+.add-todo-list-form {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+
+.delete-list-button:hover {
+  background-color: #0056b3;
+}
+
+/* Center the add todo list form */
+.add-todo-list-form {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+/* Style the delete list button */
+.delete-list-button {
+  margin-bottom: 10px;
+  padding: 10px 20px;
+  cursor: pointer;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.delete-list-button:hover {
+  background-color: #0056b3;
+}
+
+/* Ensure the share form and delete button are aligned */
+.list-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.todo-list p {
+  margin-bottom: 20px; /* Adjust the value as needed */
 }

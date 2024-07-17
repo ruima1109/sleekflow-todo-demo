@@ -3,6 +3,8 @@ import TodoList from './TodoList';
 import TodoForm from './TodoForm';
 import ShareForm from './ShareForm';
 
+import { v4 as uuidv4 } from 'uuid';
+
 import './Todo.css'; // Import the CSS file
 
 import _ from 'lodash';
@@ -25,9 +27,14 @@ let todoChangeSubscription, userToListChangeSubscription, appSyncClient;
 
 const TodoApp = () => {
   const [lists, setLists] = useState([]);
-  const [todos, setTodos] = useState([]);
   const [loginState, setLoginState] = useState(0);
   const [userIdPayload, setUserIdPayload] = useState({});
+
+  const [sortField, setSortField] = useState('');
+  const [sortDirection, setSortDirection] = useState('asc');
+
+  const [newListName, setNewListName] = useState('');
+  const [newListDescription, setNewListDescription] = useState('');
 
   const listsRef = useRef(lists);
   const setListsRef = data => {
@@ -79,6 +86,18 @@ const TodoApp = () => {
     return appSyncClient;
   };
 
+  const handleSortChange = (field) => {
+    const newDirection = (sortField === field && sortDirection === 'asc') ? 'desc' : 'asc';
+    setSortField(field);
+    setSortDirection(newDirection);
+  };
+
+  const handleNewListSubmit = async (e) => {
+    e.preventDefault();
+    await addTodoList(newListName, newListDescription);
+    setNewListName('');
+    setNewListDescription('');
+  };
 
   const todoListFields = ['listId', 'role', 'title', 'description']; 
   const userToListFields = ['userId', 'role', 'listId']; 
@@ -155,6 +174,24 @@ const TodoApp = () => {
     }`
   );
 
+  const createTodoListGql = gql(
+    `mutation createTodoList($username: String!, $item: CreateTodoListInput!) {
+      createTodoList(username: $username, item: $item) {
+        listId
+        title
+        description
+      }
+    }`
+  );
+
+  const deleteTodoListGql = gql(
+    `mutation deleteTodoList($username: String!, $listid: String!) {
+      deleteTodoList(username: $username, listid: $listid) {
+        success
+      }
+    }`
+  );
+
   const fetchAllLists = async () => {
     const session = await Auth.getSession();
     const jwtToken = session.getIdToken().getJwtToken();
@@ -172,7 +209,52 @@ const TodoApp = () => {
       return results.data?.getAllTodoLists;
     } catch (error) {
       console.log("Failed to fetch all lists", error);
-      return null;
+      return false;
+    }
+  };
+
+  const addTodoList = async (name, description) => {
+    const session = await Auth.getSession();
+    const jwtToken = session.getIdToken().getJwtToken();
+    try {
+      const client = getAppSyncClient(jwtToken);
+      const username = Auth.getUsername();
+      const listId = uuidv4(); // Generate a unique listId
+      const result = await client.mutate({
+        mutation: createTodoListGql,
+        variables: {
+          username: username,
+          item: {
+            title: name,
+            description: description,
+            listId: listId
+          }
+        }
+      });
+      return result.data?.createTodoList;
+    } catch (error) {
+      console.log("Failed to add todo list", error);
+      return false;
+    }
+  };
+
+  const deleteTodoList = async (listId) => {
+    const session = await Auth.getSession();
+    const jwtToken = session.getIdToken().getJwtToken();
+    try {
+      const client = getAppSyncClient(jwtToken);
+      const username = Auth.getUsername();
+      const result = await client.mutate({
+        mutation: deleteTodoListGql,
+        variables: {
+          username: username,
+          listid: listId
+        }
+      });
+      return result.data?.deleteTodoList;
+    } catch (error) {
+      console.log("Failed to delete todo list", error);
+      return false;
     }
   };
 
@@ -377,18 +459,17 @@ const TodoApp = () => {
     const { listId, role } = item;
     const listIndex = listsRef.current.findIndex(list => list.listId === listId);
 
-    const lists = [...listsRef.current];
-    const list = lists[listIndex];
+    let lists = [...listsRef.current];
     const updateType = type.toUpperCase();
     switch (updateType) {
       case 'REMOVE':
         if (listIndex !== -1) {
-          lists.splice(listId, 1);
+          lists.splice(listIndex, 1);
         }
         break;
       case 'INSERT':
         if (listIndex === -1) {
-          list = await fetchAllLists();
+          lists = await fetchAllLists();
         }
       case 'MODIFY':
         if (listIndex !== -1) {
@@ -430,27 +511,58 @@ const TodoApp = () => {
       <div>
         <h1>Todo App</h1>
         <div>
-            <UserAvatar userIdPayload={userIdPayload} onLogout={onLogout}/>
+          <UserAvatar userIdPayload={userIdPayload} onLogout={onLogout} />
+        </div>
+        <div className="add-todo-list-form">
+          <form onSubmit={handleNewListSubmit}>
+            <input
+              type="text"
+              placeholder="List Name"
+              value={newListName}
+              onChange={(e) => setNewListName(e.target.value)}
+              required
+            />
+            <input
+              type="text"
+              placeholder="Description"
+              value={newListDescription}
+              onChange={(e) => setNewListDescription(e.target.value)}
+              required
+            />
+            <button type="submit">Add Todo List</button>
+          </form>
         </div>
         <div>
           {lists.map(list => (
             <div key={list.listId} className="todo-list">
-              <h2>{list.title}</h2>
-              <p>{list.description}</p>
-              {list.role === 0  && (
-                <div className="share-form-container">
-                  <ShareForm listId={list.listId} shareTodoList={shareTodoList} />
-                </div>
-              )}
+              <h2>List Name: {list.title}</h2>
+              <p>Description: {list.description}</p>
               {(list.role === 0 || list.role === 1) && (
                 <div className="add-todo-form-container">
                   <TodoForm addTodo={addTodo} listId={list.listId} />
                 </div>
               )}
-              <TodoList listId={list.listId} todos={list.todos} updateTodo={updateTodo} deleteTodo={deleteTodo} readOnly={list.role !== 0 && list.role !== 1} />
+              {list.role === 0 && (
+                <div className="list-actions">
+                  <div className="share-form-container">
+                    <ShareForm listId={list.listId} shareTodoList={shareTodoList} />
+                  </div>
+                  <button className="delete-list-button" onClick={() => deleteTodoList(list.listId)}>Delete List</button>
+                </div>
+              )}
+              <TodoList
+                listId={list.listId}
+                todos={list.todos}
+                updateTodo={updateTodo}
+                deleteTodo={deleteTodo}
+                readOnly={list.role !== 0 && list.role !== 1}
+                sortField={sortField}
+                sortDirection={sortDirection}
+                handleSortChange={handleSortChange}
+              />
             </div>
           ))}
-      </div>
+        </div>
       </div>
     );
   }

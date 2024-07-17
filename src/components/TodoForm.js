@@ -59,7 +59,7 @@ const TodoForm = ({ addTodo, listId }) => {
       />
       <label>Status</label>
       <select value={status} onChange={(e) => setStatus(e.target.value)} >
-        <option value="open">Open</option>
+        <option value="not started">Not Started</option>
         <option value="in progress">In Progress</option>
       </select>
 
