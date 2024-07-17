@@ -10,6 +10,14 @@
       "StackName": "amplify-sleekflowtodoweb-dev-3aa29",
       "StackId": "arn:aws:cloudformation:us-east-1:065913925480:stack/amplify-sleekflowtodoweb-dev-3aa29/7c377500-4401-11ef-9d4d-12b83bb1ff09",
       "AmplifyAppId": "d3bjdhmkek90q"
+    },
+    "categories": {
+      "hosting": {
+        "amplifyhosting": {
+          "appId": "d3bjdhmkek90q",
+          "type": "cicd"
+        }
+      }
     }
   }
 }
