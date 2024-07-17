@@ -26,6 +26,7 @@ h2 {
   margin-bottom: 10px;
 }
 
+/* Form Styles */
 form {
   display: flex;
   align-items: center;
@@ -70,6 +71,7 @@ form button:hover:enabled {
   background-color: #0056b3;
 }
 
+/* Table Styles */
 .table-container {
   overflow-x: auto;
   margin-bottom: 20px;
@@ -96,6 +98,7 @@ td {
   vertical-align: top;
 }
 
+/* Todo Item Styles */
 .todo-item button {
   margin-left: 10px;
   padding: 5px 10px;
@@ -120,6 +123,7 @@ td {
   margin-right: 10px;
 }
 
+/* User Avatar Styles */
 .user-avatar {
   display: inline-flex;
   align-items: center;
@@ -135,6 +139,7 @@ td {
   border-radius: 50%;
 }
 
+/* User Options Styles */
 .user-options-wrapper {
   position: absolute;
   top: 35px;
@@ -157,6 +162,7 @@ td {
   color: #007bff;
 }
 
+/* Header Styles */
 .header-container {
   position: relative;
   display: flex;
@@ -169,6 +175,7 @@ td {
   font-size: 1.5em;
 }
 
+/* Todo List Styles */
 .todo-list {
   background-color: #fff;
   border-radius: 5px;
@@ -179,7 +186,8 @@ td {
   margin: 20px auto;
 }
 
-table th, table td {
+table th,
+table td {
   padding: 15px;
 }
 
@@ -191,6 +199,7 @@ table td button {
   margin-right: 5px;
 }
 
+/* Form Container Styles */
 .form-container {
   max-width: 1000px;
   margin: 0 auto 20px auto;
@@ -211,6 +220,7 @@ table td button {
   flex: 0 1 auto;
 }
 
+/* Table Actions Styles */
 .table-actions button {
   margin-right: 5px;
   padding: 5px 10px;
@@ -222,31 +232,7 @@ table td button {
   transition: background-color 0.3s ease;
 }
 
-.form-group label {
-  white-space: nowrap;
-}
-
-form .form-group {
-  display: flex;
-  align-items: center;
-}
-
-form .form-group label {
-  margin-right: 10px;
-}
-
-form .form-group input,
-form .form-group select,
-form .form-group button {
-  flex: 1;
-  margin-left: 10px;
-}
-
-td, th {
-  width: 20%;
-}
-
-/* Add these styles to make table headers look clickable */
+/* Sortable Table Headers Styles */
 th.sortable {
   cursor: pointer;
   user-select: none;
@@ -256,30 +242,19 @@ th.sortable:hover {
   background-color: #e2e6ea;
 }
 
+/* Share Form Container Styles */
 .share-form-container {
   margin-top: 10px;
 }
 
-/* Center the add todo list form */
+/* Add Todo List Form Styles */
 .add-todo-list-form {
   display: flex;
   justify-content: center;
   margin-bottom: 20px;
 }
 
-
-.delete-list-button:hover {
-  background-color: #0056b3;
-}
-
-/* Center the add todo list form */
-.add-todo-list-form {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 20px;
-}
-
-/* Style the delete list button */
+/* Delete List Button Styles */
 .delete-list-button {
   margin-bottom: 10px;
   padding: 10px 20px;
@@ -295,7 +270,7 @@ th.sortable:hover {
   background-color: #0056b3;
 }
 
-/* Ensure the share form and delete button are aligned */
+/* List Actions Styles */
 .list-actions {
   display: flex;
   align-items: center;
@@ -303,6 +278,7 @@ th.sortable:hover {
   margin-top: 10px;
 }
 
+/* Todo List Paragraph Styles */
 .todo-list p {
   margin-bottom: 20px; /* Adjust the value as needed */
 }
