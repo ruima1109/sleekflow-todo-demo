@@ -1,5 +1,5 @@
-export const REDIRECT_URI = 'http://localhost:3003';
-// export const REDIRECT_URI = "https://main.dwpb8as7hlq5t.amplifyapp.com";
+// export const REDIRECT_URI = 'http://localhost:3003';
+export const REDIRECT_URI = "https://main.d3bjdhmkek90q.amplifyapp.com";
 export const APP_ID = '77avaefai0c95es1fdb2qna3aq';
 export const IDENTITY_POOL_ID = 'us-east-1:16648cd1-ccfa-4d34-b55c-c6d43244900e';
 export const USER_POOL_ID = 'us-east-1_4bDbJMLSx';
