@@ -1,0 +1,15 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-sleekflowtodoweb-dev-3aa29-authRole",
+      "UnauthRoleArn": "arn:aws:iam::065913925480:role/amplify-sleekflowtodoweb-dev-3aa29-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::065913925480:role/amplify-sleekflowtodoweb-dev-3aa29-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-sleekflowtodoweb-dev-3aa29-deployment",
+      "UnauthRoleName": "amplify-sleekflowtodoweb-dev-3aa29-unauthRole",
+      "StackName": "amplify-sleekflowtodoweb-dev-3aa29",
+      "StackId": "arn:aws:cloudformation:us-east-1:065913925480:stack/amplify-sleekflowtodoweb-dev-3aa29/7c377500-4401-11ef-9d4d-12b83bb1ff09",
+      "AmplifyAppId": "d3bjdhmkek90q"
+    }
+  }
+}

@@ -1,0 +1,76 @@
+.app {
+  text-align: center;
+}
+
+.app-logo {
+  height: 150px;
+  pointer-events: none;
+}
+
+.app-header {
+  background-color: #fafafa;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: #282c34;
+}
+
+#app-name {
+  font-family: 'Montserrat';
+  font-size: 36px;
+  font-weight: 400;
+  margin: 42px 0 0 0;
+}
+
+#login-statement {
+  font-family: 'Lato';
+  font-size: 18px;
+  font-weight: 400;
+  margin: 22px 0;
+  width: 360px;
+  color: rgba(0, 0, 0, .6);
+  line-height: 28px;
+}
+
+#google-button-container {
+  border: 1px solid rgba(0, 0, 0, .4);
+  border-radius: 30px;
+  background-color: white;
+  cursor: pointer;
+  margin-top: 35px;
+}
+
+#google-button-link {
+  display: block;
+  padding: 10px 20px;
+  font-family: 'Lato';
+  font-size: 18px;
+}
+
+#google-button-link:link {
+  text-decoration: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+#google-button-link:visited {
+  text-decoration: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+
+#google-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#google-button-picture {
+  height: 18px;
+}
+
+#google-button-text {
+  margin-left: 10px;
+}

@@ -1,0 +1,247 @@
+/* Reset margins and paddings */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f8f9fa;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+h2 {
+  font-size: 1.5em;
+  margin-bottom: 10px;
+}
+
+form {
+  display: flex;
+  align-items: center; /* Center items vertically */
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.form-group {
+  display: flex;
+  align-items: center; /* Center items vertically */
+  gap: 10px;
+}
+
+.form-group label {
+  margin-right: 10px; /* Add margin to the right of labels */
+}
+
+form input,
+form select,
+form button {
+  padding: 10px;
+  font-size: 14px;
+}
+
+form button {
+  flex: 0 1 auto; /* Allow buttons to size based on content */
+  padding: 10px 20px;
+  cursor: pointer;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+form button:disabled {
+  background-color: #cccccc;
+}
+
+form button:hover:enabled {
+  background-color: #0056b3;
+}
+
+.table-container {
+  overflow-x: auto;
+  margin-bottom: 20px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  text-align: left;
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+  white-space: nowrap; /* Prevent text from wrapping */
+}
+
+th {
+  background-color: #f2f2f2;
+  font-weight: bold;
+}
+
+td {
+  vertical-align: top;
+}
+
+.todo-item button {
+  margin-left: 10px;
+  padding: 5px 10px;
+  cursor: pointer;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.todo-item button:hover {
+  background-color: #0056b3;
+}
+
+.todo-item button:first-of-type {
+  margin-left: 0;
+}
+
+.todo-item span {
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.user-avatar {
+  display: inline-flex;
+  align-items: center;
+  position: absolute;
+  top: 20px; /* Adjust as needed */
+  right: 60px; /* Adjust as needed */
+  cursor: pointer;
+}
+
+.user-avatar-image {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.user-options-wrapper {
+  position: absolute;
+  top: 35px; /* Adjust this value to position the dropdown correctly */
+  right: 0;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  z-index: 1; /* Ensure it stays on top */
+}
+
+.user-option {
+  padding: 10px; /* Adjust padding as needed */
+  text-align: center;
+  white-space: nowrap; /* Prevents the text from wrapping */
+}
+
+.user-option:hover {
+  background-color: #f2f2f2;
+  color:#007bff;
+}
+
+.header-container {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.title {
+  font-size: 1.5em;
+}
+
+.todo-list {
+  background-color: #fff;
+  border-radius: 5px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  max-width: 1000px; /* Set a fixed max-width for the todo list */
+  margin: 20px auto; /* Center the todo list and add vertical spacing */
+}
+
+table th, table td {
+  padding: 15px;
+}
+
+table th {
+  background-color: #e9ecef;
+}
+
+table td button {
+  margin-right: 5px;
+}
+
+.form-container {
+  max-width: 1000px; /* Adjust the max-width for form containers */
+  margin: 0 auto 20px auto; /* Center and add bottom margin */
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.form-container input,
+.form-container select,
+.form-container button {
+  flex: 1;
+  padding: 10px;
+  font-size: 14px;
+}
+
+.form-container button {
+  flex: 0 1 auto; /* Allow buttons to size based on content */
+}
+
+.table-actions button {
+  margin-right: 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.form-group label {
+  white-space: nowrap; /* Prevent label text from wrapping */
+}
+
+form .form-group {
+  display: flex;
+  align-items: center;
+}
+
+form .form-group label {
+  margin-right: 10px;
+}
+
+form .form-group input,
+form .form-group select,
+form .form-group button {
+  flex: 1;
+  margin-left: 10px; /* Add margin between the label and input */
+}
+
+td, th {
+  width: 20%;
+}
