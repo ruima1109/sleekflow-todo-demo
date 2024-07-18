@@ -138,7 +138,6 @@ const TodoApp = () => {
   const createTodoGql = gql(
     `mutation createTodoMutation($username: String!, $listid: String!, $item: CreateTodoItemInput!) {
       createTodoItem(username: $username, listid: $listid, item: $item) {
-        listId
         todoId
       }
     }`
@@ -220,18 +219,26 @@ const TodoApp = () => {
       const client = getAppSyncClient(jwtToken);
       const username = Auth.getUsername();
       const listId = uuidv4(); // Generate a unique listId
+      const newList = {
+        title: name,
+        description: description,
+        listId: listId
+      }
       const result = await client.mutate({
         mutation: createTodoListGql,
         variables: {
           username: username,
-          item: {
-            title: name,
-            description: description,
-            listId: listId
-          }
+          item: newList
         }
       });
-      return result.data?.createTodoList;
+      const success = result.data?.createTodoList;
+      if (success) {
+        let lists = [...listsRef.current];
+        newList.role = 0;
+        newList.todos = [];
+        lists.push(newList);
+        setListsRef(lists);
+      }
     } catch (error) {
       console.log("Failed to add todo list", error);
       return false;
@@ -251,12 +258,34 @@ const TodoApp = () => {
           listid: listId
         }
       });
-      return result.data?.deleteTodoList;
+      const success = result.data?.deleteTodoList;
+      if (success) {
+        let lists = [...listsRef.current];
+        const listIndex = lists.findIndex(list => list.listId === listId);
+        if (listIndex !== -1) {
+          lists.splice(listIndex, 1);
+        }
+        setListsRef(lists);
+      }
     } catch (error) {
       console.log("Failed to delete todo list", error);
       return false;
     }
   };
+
+  const findTodoLocally = (listId, todoId) => {
+    const listIndex = listsRef.current.findIndex(list => list.listId === listId);
+    if (listIndex === -1) {
+      return;
+    }
+    const list = listsRef.current[listIndex];
+    const todoIndex = list.todos.findIndex(todo => todo.todoId === todoId);
+    if (todoIndex === -1) {
+      return;
+    }
+    return list.todos[todoIndex];
+  }
+
 
   const addTodo = async (listId, todo) => {
     const session = await Auth.getSession();
@@ -273,6 +302,14 @@ const TodoApp = () => {
         }
       });
       const todId = result.data?.createTodoItem?.todoId;
+      if (todId) {
+        let lists = [...listsRef.current];
+        const listIndex = lists.findIndex(list => list.listId === listId);
+        if (listIndex !== -1) {
+          lists[listIndex].todos.push(todo);
+          setListsRef(lists);
+        }
+      }
       return todId
     } catch (error) {
       console.log("Failed to add todo item", error);
@@ -295,7 +332,20 @@ const TodoApp = () => {
           item: updatedTodo
         }
       });
-      return result.data?.updateTodoItem?.success;
+      const success = result.data?.updateTodoItem?.success;
+      if (success) {
+        let lists = [...listsRef.current];
+        const listIndex = lists.findIndex(list => list.listId === listId);
+        if (listIndex !== -1) {
+          const todoIndex = lists[listIndex].todos.findIndex(todo => todo.todoId === todoId);
+          if (todoIndex === -1) {
+            return;
+          }
+          updatedTodo.todoId = todoId;
+          lists[listIndex].todos[todoIndex] = updatedTodo;
+          setListsRef(lists);
+        }
+      }
     } catch (error) {
       console.log("Failed to update todo item", error);
       return false;
@@ -317,7 +367,20 @@ const TodoApp = () => {
         },
         fetchPolicy: 'no-cache' // disable cache as the fetch all is used to keep data up-to-date if any unexpected errors happen
       });
-      return result.data?.deleteTodoItem?.success;
+      const success = result.data?.deleteTodoItem?.success;
+
+      if (success) {
+        let lists = [...listsRef.current];
+        const listIndex = lists.findIndex(list => list.listId === listId);
+        if (listIndex !== -1) {
+          const todoIndex = lists[listIndex].todos.findIndex(todo => todo.todoId === todoId);
+          if (todoIndex === -1) {
+            return;
+          }
+          lists[listIndex].todos.splice(todoIndex, 1);
+          setListsRef(lists);
+        }
+      }
     } catch (error) {
       console.log("Failed to delete todo item", error);
       return false;

@@ -38,7 +38,7 @@ const TodoList = ({ listId, todos, updateTodo, deleteTodo, readOnly, sortField, 
       const dateB = b.dueDate || 0;
       return sortDirection === 'asc' ? dateA - dateB : dateB - dateA;
     } else if (sortField === 'status') {
-      const statusOrder = ['not started', 'in progress', 'completed'];
+      const statusOrder = ['Not Started', 'In Progress', 'Completed'];
       const statusA = statusOrder.indexOf(a.status);
       const statusB = statusOrder.indexOf(b.status);
       return sortDirection === 'asc' ? statusA - statusB : statusB - statusA;
@@ -116,9 +116,9 @@ const TodoList = ({ listId, todos, updateTodo, deleteTodo, readOnly, sortField, 
                     placeholder="Due Date"
                   />
                   <select name="status" value={editFormData.status} onChange={handleEditChange}>
-                    <option value="not started">Not Started</option>
-                    <option value="in progress">In Progress</option>
-                    <option value="completed">Completed</option>
+                    <option value="Not Started">Not Started</option>
+                    <option value="In Progress">In Progress</option>
+                    <option value="Completed">Completed</option>
                   </select>
                   <button type="submit">Save</button>
                   <button type="button" onClick={() => setEditingTodoId(null)}>Cancel</button>

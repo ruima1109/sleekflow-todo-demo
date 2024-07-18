@@ -4,7 +4,7 @@ const TodoForm = ({ addTodo, listId }) => {
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [dueDate, setDueDate] = useState('');
-  const [status, setStatus] = useState('open');
+  const [status, setStatus] = useState('Not Started');
   const [disabled, setDisabled] = useState(true);
 
   useEffect(() => {
@@ -32,7 +32,7 @@ const TodoForm = ({ addTodo, listId }) => {
       setName('');
       setDescription('');
       setDueDate('');
-      setStatus('open');
+      setStatus('Not Started');
     }
   };
 
@@ -59,8 +59,8 @@ const TodoForm = ({ addTodo, listId }) => {
       />
       <label>Status</label>
       <select value={status} onChange={(e) => setStatus(e.target.value)} >
-        <option value="not started">Not Started</option>
-        <option value="in progress">In Progress</option>
+        <option value="Not Started">Not Started</option>
+        <option value="In Progress">In Progress</option>
       </select>
 
       <button type="submit" disabled={disabled}>Add Todo</button>
